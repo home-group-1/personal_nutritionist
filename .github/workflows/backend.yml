@@ -20,4 +20,4 @@ jobs:
     - name: Build the Docker image
       run: docker build -t fastapi-ci-cd-pipeline ./backend 
     - name: Pusth to Docker Hub
-      run: docker push ${{secrets.DOCKERHUB_USERNAME}}/fastapi-ci-cd-pipeline:latest
+      run: docker push fastapi-ci-cd-pipeline:latest
