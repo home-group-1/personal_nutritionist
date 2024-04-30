@@ -13,8 +13,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: login to DockerHub
-      run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+      run: docker login -u ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_PASSWORD}}
     - name: Build the Docker image
       run: docker build -t fastapi . 
     - name: Pusth to Docker Hub
-      run: docker push ${{secrets.DOCKER_USERNAME}}/fastapi-ci-cd-pipeline:latest
+      run: docker push ${{secrets.DOCKERHUB_USERNAME}}/fastapi-ci-cd-pipeline:latest
