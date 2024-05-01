@@ -1,11 +1,17 @@
+# Utiliza una imagen base oficial de Python
 FROM python:3.9
 
-WORKDIR /backend
+# Establece el directorio de trabajo en el contenedor
+WORKDIR /app
 
-COPY ./requirements.txt requirements.txt
+# Copia el archivo de requisitos primero para aprovechar la caché de Docker
+COPY requirements.txt .
 
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+# Instala las dependencias del proyecto
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ./app /backend/app
+# Copia el resto del código fuente del proyecto al directorio de trabajo
+COPY . .
 
-CMD ["gunicorn", "app.main:app", "--workers", "4", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000"]
+# Comando para ejecutar la aplicación usando Uvicorn
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]
