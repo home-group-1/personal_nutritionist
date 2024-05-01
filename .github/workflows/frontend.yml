@@ -1,0 +1,38 @@
+name: Frontend CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    - name: Build the Docker image
+      run: docker build -t ${{secrets.DOCKERHUB_USERNAME}}/react-ci-cd-pipeline ./frontend 
+    - name: Pusth to Docker Hub
+      run: docker push ${{secrets.DOCKERHUB_USERNAME}}/react-ci-cd-pipeline:latest
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+
+    steps:
+    - name: Pull Docker image
+      working-directory: /home/ubuntu/frontend
+      run: sudo docker pull ${{secrets.DOCKERHUB_USERNAME}}/react-ci-cd-pipeline:latest
+    - name: Delete Old docker container
+      working-directory: /home/ubuntu/frontend
+      run: sudo docker rm -f frontend-container || true
+    - name: Run Docker Container
+      working-directory: /home/ubuntu/frontend
+      run: sudo docker run -d -p 80:80 --name frontend-container ${{secrets.DOCKERHUB_USERNAME}}/react-ci-cd-pipeline:latest
