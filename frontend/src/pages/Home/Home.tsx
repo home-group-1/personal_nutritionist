@@ -1,21 +1,22 @@
-import { Flex, Layout, Row, Space } from "antd";
+import { Layout, Row, Space } from "antd";
 import { FC } from "react";
 import MyForm from "../../components/Form/Form";
 import "./Home.css";
+import Content from "../../components/Content/Content";
 
 const { Header } = Layout;
 
 const Home: FC = () => {
     return (
     <Layout className="layout">
-      <Header className="header">Header</Header>
+      <Header className="header">Nombre del proyecto o yo que sé</Header>
       <Layout>
-        <Flex wrap="wrap" align="center">
-          <Space className="sider">
-            <MyForm />
-          </Space>
-          <Row className="content">Content</Row>
-        </Flex>
+        <Space wrap className="container">
+          <MyForm />
+          <Row className="content" justify="center">
+            <Content />
+          </Row>
+        </Space>
       </Layout>
     </Layout>
     );
