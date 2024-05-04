@@ -1,0 +1,10 @@
+.form {
+    padding: 1em;
+    overflow-y: scroll;
+    height: 85vh;
+    width: 100%;
+}
+
+.form-item {
+    width: 288px;
+}

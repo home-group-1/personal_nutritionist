@@ -1,0 +1,29 @@
+.layout {
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+}
+
+.header {
+    text-align: center;
+    color: #fff;
+    height: 10vh;
+    background-color: #184e90;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.content {
+    justify-content: center;
+    min-height: 120px;
+    line-height: 120px;
+    width: 100%;
+}
+
+.sider {
+    text-align: center;
+    width: 700px;
+    color: #fff;
+}
