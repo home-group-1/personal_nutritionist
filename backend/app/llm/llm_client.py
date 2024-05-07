@@ -40,4 +40,4 @@ class LLMClient:
             ]
         )
         # Extrae y devuelve el contenido de la respuesta.
-        return response.choices[0].message.content
+        return response['choices'][0]['message']['content']
