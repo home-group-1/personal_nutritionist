@@ -12,7 +12,7 @@ COPY ./tsconfig.json .
 
 RUN npm run build
 
-# Using Nginx as the production server
+# Using Nginx as the production server 
 FROM nginx:alpine
 
 COPY --from=build /frontend/build /usr/share/nginx/html
