@@ -69,3 +69,38 @@ export const spanishFrecuency = {
     Frequently: 'Frecuentemente',
     Always: 'Siempre',
 };
+
+export const calculateIMC = (weight: number, height: number): string => {
+    const heightMeters = height / 100;
+    const imc = weight / (heightMeters * heightMeters);
+    console.log({ imc });
+    const imcStates = {
+        4: 'Insuficiencia de peso', // BMI less than 18.5
+        0: 'Peso normal',           // BMI 18.5 to 24.9
+        1: 'Nivel de sobrepeso I',  // BMI 25 to 29.9
+        2: 'Nivel de sobrepeso II', // BMI 30 to 34.9
+        3: 'Nivel de obesidad I',   // BMI 35 to 39.9
+        5: 'Nivel de obesidad II',  // BMI 40 to 49.9
+        6: 'Nivel de obesidad III'  // BMI greater than 50
+    };
+
+    if (imc < 18.5) {
+        return imcStates[4];
+    }
+    if (imc >= 18.5 && imc < 25) {
+        return imcStates[0];
+    }
+    if (imc >= 25 && imc < 30) {
+        return imcStates[1];
+    }
+    if (imc >= 30 && imc < 35) {
+        return imcStates[2];
+    }
+    if (imc >= 35 && imc < 40) {
+        return imcStates[3];
+    }
+    if (imc >= 40 && imc < 50) {
+        return imcStates[5];
+    }
+    return imcStates[6];
+}
