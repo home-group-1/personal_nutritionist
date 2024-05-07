@@ -1,7 +1,7 @@
 # Utiliza una imagen base oficial de Python
 FROM python:3.9
 
-# Establece el directorio de trabajo en el contenedor
+# Establece el directorio de trabajo en el contenedor 
 WORKDIR /app
 
 # Copia el archivo de requisitos primero para aprovechar la caché de Docker
