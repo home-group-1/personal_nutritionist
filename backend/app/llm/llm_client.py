@@ -20,7 +20,7 @@ class LLMClient:
             model="gpt-3.5-turbo-0125",
             messages=[
                 {"role": "system", "content": f"""
-                Dados los siguientes datos de un usuario, cuya predicción indica un estado de '{self.nobeyesdad[user_prediction]}' en el futuro, solicito recomendaciones para mejorar su estilo de vida y reducir los riesgos asociados con la obesidad:
+                Dados los siguientes datos de un usuario, cuya predicción indica un estado de '{self.nobeyesdad[user_prediction]}' en el futuro, solicito darle a conocer la predicción a futuro y adicionalmente recomendaciones para mejorar su estilo de vida y reducir los riesgos asociados con la obesidad:
                 - Edad: {user_data['Age']} años
                 - Peso: {user_data['Weight']} kg
                 - Género: {'Femenino' if user_data['Gender'] else 'Masculino'}
