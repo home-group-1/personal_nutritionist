@@ -2,9 +2,10 @@ import { Form, Input, Button, Select, Flex, Divider } from "antd";
 import { ArrowLeftOutlined, ArrowRightOutlined, SendOutlined, UndoOutlined } from "@ant-design/icons";
 import "./Form.css";
 import type { BinaryType, FormDataUser, Frecuency, Gender, Transportation } from "../../types/types";
-import { freMap, genderMap, mtransMap, spanishBinary, spanishFrecuency, spanishGender, spanishTransportation, yesNoMap } from "../../utils";
+import { calculateIMC, freMap, genderMap, mtransMap, spanishBinary, spanishFrecuency, spanishGender, spanishTransportation, yesNoMap } from "../../utils";
 import { useState } from "react";
 import useStore from "../../store";
+import { omit } from "lodash";
 
 const { Option } = Select;
 const { Item, useForm } = Form;
@@ -13,10 +14,13 @@ const MyForm = () => {
   const [step, setStep] = useState<1 | 2>(1);
   const [form] = useForm<FormDataUser>();
   const { fetchRecommendations, setText } = useStore();
+  const { setCurrentStatus } = useStore();
 
   const onFinish = (values: FormDataUser) => {
     setText('');
-    fetchRecommendations(values).then(() => {
+    setCurrentStatus(calculateIMC(values?.Weight, values.Height || 1))
+    console.log(values);
+    fetchRecommendations({...omit(values, ['Height'])}).then(() => {
       form.resetFields();
       setStep(1);
     });
@@ -67,16 +71,12 @@ const MyForm = () => {
           <Input type="number" min={0} />
         </Item>
         <Item
-          label="¿Cuál es tu medio de transporte principal?"
-          name="MTRANS"
+          label="Estatura (cm)"
+          name="Height"
           className="form-item"
-          rules={[{ required: true, message: "¡Por favor, selecciona una opción!" }]}
+          rules={[{ required: true, message: "¡Ingresa tu estatura!" }]}
         >
-          <Select placeholder="Selecciona una opción">
-            {Object.keys(mtransMap).map((key) => (
-              <Option value={mtransMap[key as Transportation]}>{spanishTransportation[key as Transportation]}</Option>
-            ))}
-          </Select>
+          <Input type="number" min={0} />
         </Item>
       </Flex>
       <Flex wrap="wrap" gap={10} justify="center" style={getDisplayStyle(1)}>
@@ -205,6 +205,18 @@ const MyForm = () => {
           <Select placeholder="Selecciona una opción">
             {Object.keys(yesNoMap).map((key) => (
               <Option value={yesNoMap[key as BinaryType]}>{spanishBinary[key as BinaryType]}</Option>
+            ))}
+          </Select>
+        </Item>
+        <Item
+          label="¿Cuál es tu medio de transporte principal?"
+          name="MTRANS"
+          className="form-item"
+          rules={[{ required: true, message: "¡Por favor, selecciona una opción!" }]}
+        >
+          <Select placeholder="Selecciona una opción">
+            {Object.keys(mtransMap).map((key) => (
+              <Option value={mtransMap[key as Transportation]}>{spanishTransportation[key as Transportation]}</Option>
             ))}
           </Select>
         </Item>

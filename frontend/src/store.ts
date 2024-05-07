@@ -19,6 +19,8 @@ const useStore = create<Store>((set) => ({
       set({ loading: false });
     }
   },
+  currentStatus: '',
+  setCurrentStatus: (status) => set({ currentStatus: status }),
 }));
 
 export default useStore;

@@ -20,6 +20,7 @@ export type FormDataUser = {
     Gender: Binary;
     Age: number;
     Weight: number;
+    Height?: number;
     family_history_with_overweight: Binary;
     FAVC: Binary;
     FCVC: number;
@@ -40,4 +41,6 @@ export type Store = {
     loading: boolean;       
     setText: (text: string) => void;  
     fetchRecommendations: (postData: FormDataUser) => Promise<void>;
+    currentStatus: string;
+    setCurrentStatus: (status: string) => void;
   }
