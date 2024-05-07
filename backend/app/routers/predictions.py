@@ -5,6 +5,9 @@ from app.llm.llm_client import LLMClient
 import joblib
 import os
 from dotenv import load_dotenv
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+import pandas as pd
 
 router = APIRouter()
 
@@ -17,12 +20,31 @@ llm_client = LLMClient(api_key=os.getenv('OPEN_AI_KEY'))
 # Carga el modelo usando joblib.
 model = joblib.load("model.pkl")  # Asegúrate de que 'model.pkl' esté en la ruta correcta.
 
+# Dataset and scaler
+datasetObesity = pd.read_csv('clean_ObessityONE.csv')
+
+X = datasetObesity.drop(['NObeyesdad', 'Height'], axis=1)
+y = datasetObesity['NObeyesdad']
+print(X.columns.tolist())
+
+# Splitting the dataset into train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+scaler = StandardScaler()
+
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+
 @router.post("/predict")
 async def predict(data: UserData):
     try:
         # Convertir los datos de la request a diccionario y luego a lista para el modelo
         data_dict = data.dict()
-        prediction = model.predict([list(data_dict.values())])
+        data_frame = pd.DataFrame(data_dict, index=[0])
+        # Normalization scaler
+        data_scaler = scaler.transform(data_frame)
+        prediction = model.predict(data_scaler)
 
         # Obtener recomendaciones usando los datos y la predicción
         recommendations = llm_client.get_recommendations(data_dict, prediction[0])
