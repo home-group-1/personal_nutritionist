@@ -35,6 +35,7 @@ jobs:
     - name: Run Docker Container
       run: |
         sudo docker run -d -p 8000:8000 \
-        --name backend-container ${{secrets.DOCKERHUB_USERNAME}}/fastapi-ci-cd-pipeline:latest \
-        -e OPEN_AI_KEY="${{ secrets.OPEN_AI_KEY }}"
+        --name backend-container \
+        -e OPEN_AI_KEY="${{ secrets.OPEN_AI_KEY }}" \
+        ${{secrets.DOCKERHUB_USERNAME}}/fastapi-ci-cd-pipeline:latest
             
