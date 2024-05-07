@@ -2,8 +2,9 @@ name: Backend CI/CD
 
 on:
   push:
-    branches: [ "main" ]
-
+    branches: [ "develop" ]
+    paths:
+          - 'backend/**'
 jobs:
 
   build:
@@ -28,15 +29,12 @@ jobs:
 
     steps:
     - name: Pull Docker image
-      working-directory: /home/ubuntu/backend
       run: sudo docker pull ${{secrets.DOCKERHUB_USERNAME}}/fastapi-ci-cd-pipeline:latest
     - name: Delete Old docker container
-      working-directory: /home/ubuntu/backend
       run: sudo docker rm -f backend-container || true
     - name: Run Docker Container
-      working-directory: /home/ubuntu/backend
       run: | 
             sudo docker run -d -p 8000:8000 \
             --name backend-container ${{secrets.DOCKERHUB_USERNAME}}/fastapi-ci-cd-pipeline:latest \
-            e OPEN_AI_KEY="${{ secrets.OPEN_AI_KEY }}"
+            -e OPEN_AI_KEY="${{ secrets.OPEN_AI_KEY }}"
             

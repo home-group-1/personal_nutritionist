@@ -2,8 +2,9 @@ name: Frontend CI/CD
 
 on:
   push:
-    branches: [ "main" ]
-
+    branches: [ "develop" ]
+    paths:
+          - 'frontend/**'
 jobs:
 
   build:
@@ -35,4 +36,6 @@ jobs:
       run: sudo docker rm -f frontend-container || true
     - name: Run Docker Container
       working-directory: /home/ubuntu/frontend
-      run: sudo docker run -d -p 80:80 --name frontend-container ${{secrets.DOCKERHUB_USERNAME}}/react-ci-cd-pipeline:latest
+      run: sudo docker run -d -p 80:80 --name frontend-container \
+        -e REACT_APP_API_URL="${{ secrets.REACT_APP_API_URL }}" \
+        ${{secrets.DOCKERHUB_USERNAME}}/react-ci-cd-pipeline:latest
