@@ -21,7 +21,7 @@ model = joblib.load("model.pkl")  # Asegúrate de que 'model.pkl' esté en la ru
 async def predict(data: UserData):
     try:
         # Convertir los datos de la request a diccionario y luego a lista para el modelo
-        data_dict = data.dict()
+        data_dict = data.model_dump()
         prediction = model.predict([list(data_dict.values())])
 
         # Obtener recomendaciones usando los datos y la predicción

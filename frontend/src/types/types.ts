@@ -36,6 +36,8 @@ export type FormDataUser = {
 };
 
 export type Store = {
-    text: string;              
+    text: string;       
+    loading: boolean;       
     setText: (text: string) => void;  
+    fetchRecommendations: (postData: FormDataUser) => Promise<void>;
   }

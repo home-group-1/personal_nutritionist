@@ -1,38 +1,41 @@
-import { Form, Input, Button, Select, Row, Flex, Divider } from "antd";
-import { ArrowLeftOutlined, ArrowRightOutlined, SendOutlined } from "@ant-design/icons";
-import { capitalize } from "lodash";
+import { Form, Input, Button, Select, Flex, Divider } from "antd";
+import { ArrowLeftOutlined, ArrowRightOutlined, SendOutlined, UndoOutlined } from "@ant-design/icons";
 import "./Form.css";
 import type { BinaryType, FormDataUser, Frecuency, Gender, Transportation } from "../../types/types";
 import { freMap, genderMap, mtransMap, spanishBinary, spanishFrecuency, spanishGender, spanishTransportation, yesNoMap } from "../../utils";
 import { useState } from "react";
+import useStore from "../../store";
 
 const { Option } = Select;
-const { Item } = Form;
+const { Item, useForm } = Form;
 
 const MyForm = () => {
   const [step, setStep] = useState<1 | 2>(1);
-  const onFinish = (values: any) => {
-    console.log("Received values from form: ", values);
+  const [form] = useForm<FormDataUser>();
+  const { fetchRecommendations, setText } = useStore();
+
+  const onFinish = (values: FormDataUser) => {
+    setText('');
+    fetchRecommendations(values).then(() => {
+      form.resetFields();
+      setStep(1);
+    });
   };
 
-  const styleDisplay1 = {
-    display: step === 1 ? "" : "none",
-  };
-
-  const styleDisplay2 = {
-    display: step === 2 ? "" : "none",
-  };
+  const getDisplayStyle = (currentStep: number) => ({
+    display: step === currentStep ? "" : "none",
+  });
 
   return (
     <>
     <Divider>Queremos saber un poco sobre tu rutina</Divider>
     <Form<FormDataUser>
-      name="user_data_form"
       onFinish={onFinish}
       layout="vertical"
       className="form"
+      form={form}
     >
-      <Flex wrap="wrap" gap={10} justify="center" style={styleDisplay1}>
+      <Flex wrap="wrap" gap={10} justify="center" style={getDisplayStyle(1)}>
         <Item
           label="Género"
           name="Gender"
@@ -54,7 +57,7 @@ const MyForm = () => {
           <Input type="number" />
         </Item>
       </Flex>
-      <Flex wrap="wrap" gap={10} justify="center" style={styleDisplay1}>
+      <Flex wrap="wrap" gap={10} justify="center" style={getDisplayStyle(1)}>
         <Item
           label="Peso (kg)"
           name="Weight"
@@ -76,7 +79,7 @@ const MyForm = () => {
           </Select>
         </Item>
       </Flex>
-      <Flex wrap="wrap" gap={10} justify="center" style={styleDisplay1}>
+      <Flex wrap="wrap" gap={10} justify="center" style={getDisplayStyle(1)}>
         <Item
           label="¿Fumas?"
           name="SMOKE"
@@ -98,7 +101,7 @@ const MyForm = () => {
           <Input type="number" min={0} />
         </Item>
       </Flex>
-      <Flex wrap="wrap" gap={10} justify="center" style={styleDisplay1}>
+      <Flex wrap="wrap" gap={10} justify="center" style={getDisplayStyle(1)}>
         <Item
           label="¿Controlas las calorías que consumes diariamente?"
           name="SCC"
@@ -124,7 +127,7 @@ const MyForm = () => {
           </Select>
         </Item>
       </Flex>
-      <Flex wrap="wrap" gap={10} justify="center" style={styleDisplay1}>
+      <Flex wrap="wrap" gap={10} justify="center" style={getDisplayStyle(1)}>
         <Item
           label="¿Cuántas horas pasas frente a una pantalla al día?"
           name="TUE"
@@ -146,7 +149,7 @@ const MyForm = () => {
           </Select>
         </Item>
       </Flex>
-      <Flex wrap="wrap" gap={10} justify="center" style={styleDisplay2}>
+      <Flex wrap="wrap" gap={10} justify="center" style={getDisplayStyle(2)}>
         <Item
           label="¿Consumes frecuentemente alimentos altos en calorías?"
           name="FAVC"
@@ -168,7 +171,7 @@ const MyForm = () => {
           <Input type="number" min={1} max={3} />
         </Item>
       </Flex>
-      <Flex wrap="wrap" gap={10} justify="center" style={styleDisplay2}>
+      <Flex wrap="wrap" gap={10} justify="center" style={getDisplayStyle(2)}>
         <Item
           label="¿Cuántas comidas principales consumes al día?"
           name="NCP"
@@ -190,7 +193,7 @@ const MyForm = () => {
           </Select>
         </Item>
       </Flex>
-      <Flex wrap="wrap" gap={10} justify="center" style={styleDisplay2}>
+      <Flex wrap="wrap" gap={10} justify="center" style={getDisplayStyle(2)}>
         <Item
           label="¿Algún miembro de tu familia ha sufrido o sufre de sobrepeso?"
           name="family_history_with_overweight"
@@ -208,11 +211,20 @@ const MyForm = () => {
       </Flex>
 
       <Item>
-        <Flex justify="end" gap={15}>
+        <Flex justify="end" gap={8}>
+        <Button 
+            icon={<UndoOutlined />} 
+            type="default" 
+            onClick={() => {
+              form.resetFields()
+              setText('')
+            }} 
+        > Limpiar
+        </Button>
           <Button
             type="dashed"
             onClick={() => setStep(1)}
-            style={styleDisplay2}
+            style={getDisplayStyle(2)}
             icon={<ArrowLeftOutlined />}
           >
             Anterior
@@ -220,7 +232,7 @@ const MyForm = () => {
           <Button
             type="dashed"
             onClick={() => setStep(2)}
-            style={styleDisplay1}
+            style={getDisplayStyle(1)}
             icon={<ArrowRightOutlined />}
           >
             Siguiente
