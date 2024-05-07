@@ -10,6 +10,9 @@ COPY ./public ./public
 COPY ./src ./src
 COPY ./tsconfig.json .
 
+ARG REACT_APP_API_URL
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 RUN npm run build
 
 # Using Nginx as the production server 

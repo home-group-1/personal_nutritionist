@@ -19,7 +19,7 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
     - name: Build the Docker image
-      run: docker build -t ${{secrets.DOCKERHUB_USERNAME}}/react-ci-cd-pipeline ./frontend 
+      run: docker build --build-arg REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} -t ${{ secrets.DOCKERHUB_USERNAME }}/react-ci-cd-pipeline ./frontend 
     - name: Pusth to Docker Hub
       run: docker push ${{secrets.DOCKERHUB_USERNAME}}/react-ci-cd-pipeline:latest
 
