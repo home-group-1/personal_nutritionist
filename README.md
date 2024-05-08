@@ -9,7 +9,6 @@ La aplicación surge en respuesta a la creciente incidencia de problemas relacio
 ## Tecnologías utilizadas
 - **Frontend**: React
 - **Backend**: Python/Flask
-- **Base de Datos**: PostgreSQL
 - **Machine Learning**: scikit-learn y pandas para la exploración de datos y entrenamiento de modelos.
 - **Despliegue**: Utilización de OpenAI LLM para análisis y generación de respuestas personalizadas.
 
