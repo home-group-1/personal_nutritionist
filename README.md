@@ -10,7 +10,7 @@ La aplicación surge en respuesta a la creciente incidencia de problemas relacio
 - **Frontend**: React
 - **Backend**: Python/Flask
 - **Machine Learning**: scikit-learn y pandas para la exploración de datos y entrenamiento de modelos.
-- **Despliegue**: Utilización de OpenAI LLM para análisis y generación de respuestas personalizadas.
+- **Despliegue**: AWS - Utilización de OpenAI LLM para análisis y generación de respuestas personalizadas.
 
 ## Cómo empezar
 
@@ -47,6 +47,9 @@ Variables de enotorno:
 ```bash
 REACT_APP_API_URL='http://localhost:8000'
 ```
+
+## Presentaciones
+[Slides](https://docs.google.com/presentation/d/17NYpEY2iTnY9WxUXiSPs-C_h6KlDdONLaIJfffUUjBE/edit?usp=sharing)
 
 ## Enlace
 [FitFuturo](http://ec2-3-89-118-190.compute-1.amazonaws.com/)
