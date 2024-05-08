@@ -98,7 +98,14 @@ const MyForm = () => {
           className="form-item"
           rules={[{ required: true, message: "¡Por favor, ingresa tu CH2O!" }]}
         >
-          <Input type="number" min={0} />
+          <Select 
+            placeholder="Selecciona una opción"
+            options={[
+              { value: 1, label: 'Menos de 1 litro' },
+              { value: 2, label: 'Entre 1 y 2 litros' },
+              { value: 3, label: 'Más de 2 litros' },
+            ]}
+          />
         </Item>
       </Flex>
       <Flex wrap="wrap" gap={10} justify="center" style={getDisplayStyle(1)}>
@@ -134,7 +141,15 @@ const MyForm = () => {
           className="form-item"
           rules={[{ required: true, message: "¡Por favor, ingresa tu TUE!" }]}
         >
-          <Input type="number" />
+          <Select 
+            placeholder="Selecciona una opción"
+            options={[
+              { value: 0, label: 'Ninguna' },
+              { value: 1, label: 'Menos de 1 hora' },
+              { value: 2, label: 'Entre 1 y 3 horas' },
+              { value: 3, label: 'Más de 3 horas' },
+            ]}
+          />
         </Item>
         <Item
           label="¿Con qué frecuencia consumes alcohol?"
@@ -168,7 +183,14 @@ const MyForm = () => {
           className="form-item"
           rules={[{ required: true, message: "¡Por favor, ingresa tu FCVC!" }]}
         >
-          <Input type="number" min={1} max={3} />
+          <Select 
+            placeholder="Selecciona una opción"
+            options={[
+              { value: 1, label: 'Nunca' },
+              { value: 2, label: 'A veces' },
+              { value: 3, label: 'Siempre' },
+            ]}
+          />
         </Item>
       </Flex>
       <Flex wrap="wrap" gap={10} justify="center" style={getDisplayStyle(2)}>
@@ -178,7 +200,15 @@ const MyForm = () => {
           className="form-item"
           rules={[{ required: true, message: "¡Por favor, ingresa tu NCP!" }]}
         >
-          <Input type="number" min={0} />
+          <Select 
+            placeholder="Selecciona una opción"
+            options={[
+              { value: 1, label: 'Entre 1 y 2' },
+              { value: 2, label: '3' },
+              { value: 3, label: 'Más de 3' },
+              { value: 4, label: 'Sin respuesta' },
+            ]}
+          />
         </Item>
         <Item
           label="¿Con qué frecuencia consumes alimentos entre comidas?"

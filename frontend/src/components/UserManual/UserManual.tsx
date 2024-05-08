@@ -3,7 +3,7 @@ import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Affix, Button, Divider, Drawer } from 'antd';
 
 const UserManual = () => {
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(true);
     return (
         <div>
             <Affix
