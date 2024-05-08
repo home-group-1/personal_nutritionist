@@ -15,18 +15,18 @@ La aplicación surge en respuesta a la creciente incidencia de problemas relacio
 
 ## Cómo empezar
 
+### Instalación
+Clonar el repositorio:
+```bash
+git clone git@github.com:home-group-1/personal_nutritionist.git
+```
+
 ### Prerrequisitos
 Es recomendable usar un entorno virtual en la carpeta backend:
 ```bash
 python -m venv venv
 source venv/bin/activate  # En Windows use venv\Scripts\activate
 ````
-
-### Instalación
-Clonar el repositorio:
-```bash
-git clone git@github.com:home-group-1/personal_nutritionist.git
-```
 
 ### Para el backend
 ```bash
