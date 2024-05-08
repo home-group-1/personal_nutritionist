@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import { Affix, Button, Divider, Drawer } from 'antd';
+import { Affix, Alert, Button, Divider, Drawer } from 'antd';
 
 const UserManual = () => {
     const [visible, setVisible] = useState(true);
@@ -23,6 +23,19 @@ const UserManual = () => {
                 open={visible} 
                 width={600}
             >
+                <Alert 
+                    message={<b>Advertencia sobre el uso de FitFuturo</b>} 
+                    type="warning"
+                    description={
+                        <p>
+                            En FitFuturo, empleamos tecnología de IA para proporcionar recomendaciones basadas en tus datos. Sin embargo,
+                            estas sugerencias no sustituyen el consejo médico profesional. La IA no comprende todas las particularidades de la salud humana,
+                            por lo que te recomendamos consultar a médicos o especialistas para un asesoramiento personalizado y adecuado a tus necesidades de salud.
+                        </p>
+                    }
+                    showIcon 
+                />
+                <Divider />
                 <p>
                    Bienvenido a FitFuturo, tu compañero digital para comprender y mejorar tu salud. 
                    Esta aplicación está diseñada para ayudarte a gestionar tu peso corporal ofreciendo 
