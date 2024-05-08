@@ -34,9 +34,20 @@ cd backend
 pip install -r requirements.txt
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
+Variables de entorno:
+```bash
+OPEN_AI_KEY=tu_key
+```
 
 ### Para el frontend
 ```bash
 cd ../frontend
 npm install
 ```
+Variables de enotorno:
+```bash
+REACT_APP_API_URL='http://localhost:8000'
+```
+
+## Link
+[FitFuturo](http://ec2-3-89-118-190.compute-1.amazonaws.com/)
