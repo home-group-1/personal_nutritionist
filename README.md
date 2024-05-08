@@ -49,5 +49,5 @@ Variables de enotorno:
 REACT_APP_API_URL='http://localhost:8000'
 ```
 
-## Link
+## Enlace
 [FitFuturo](http://ec2-3-89-118-190.compute-1.amazonaws.com/)
