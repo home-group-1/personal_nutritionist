@@ -28,14 +28,14 @@ Clonar el repositorio:
 git clone git@github.com:home-group-1/personal_nutritionist.git
 ```
 
-# Para el backend
+### Para el backend
 ```bash
 cd backend
 pip install -r requirements.txt
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-# Para el frontend
+### Para el frontend
 ```bash
 cd ../frontend
 npm install
